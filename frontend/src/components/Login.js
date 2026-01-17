@@ -38,7 +38,7 @@ const Longin = () => {
       if (localStorage.getItem("token")) {
         navigate("/");
       }
-    }, []);
+    }, [navigate]);
 
   return (
     <div className="container mt-2">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
@@ -11,7 +11,7 @@ export default function Signup() {
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, password, cpassword } = note;
+    const { name, email, password } = note;
     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/createuser`, {
       method: "POST",
       headers: {
@@ -40,7 +40,7 @@ export default function Signup() {
     if (localStorage.getItem("token")) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
   return (
     <div className="container mt-2">
       <form onSubmit={handleSubmit}>
