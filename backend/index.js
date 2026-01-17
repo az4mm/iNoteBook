@@ -6,7 +6,9 @@ var cors = require("cors");
 connectToMongo();
 const app = express();
 const port = 5000;
-app.use(cors());
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGIN
+}));
 app.use(express.json()); //middleware to use req.body
 
 app.get("/", (req, res) => {
