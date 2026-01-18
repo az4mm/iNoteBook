@@ -1,9 +1,10 @@
 import  {  useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Longin = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [note, setNote] = useState({ email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
@@ -61,17 +62,30 @@ const Longin = () => {
           </div>
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
+          <label htmlFor="password" className="form-label">
             Password
           </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            value={note.password}
-            onChange={onChange}
-          />
+          <div className="input-group">
+            <input
+              type={showPassword ? "text" : "password"}
+              className="form-control"
+              id="password"
+              name="password"
+              value={note.password}
+              onChange={onChange}
+            />
+            <button
+              className="btn btn-outline-secondary"
+              type="button"
+              onClick={() => setShowPassword((previous) => !previous)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              <i
+                className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+                aria-hidden="true"
+              ></i>
+            </button>
+          </div>
         </div>
         <button type="submit" className="btn btn-primary">
           Submit
@@ -81,4 +95,4 @@ const Longin = () => {
   );
 };
 
-export default Longin;
+export default Login;
