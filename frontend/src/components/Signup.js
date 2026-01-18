@@ -11,9 +11,19 @@ export default function Signup() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, password } = note;
+    const { name, email, password, cpassword } = note;
+
+    // Check if passwords match
+    if (password !== cpassword) {
+      setPasswordError("Passwords do not match");
+      return;
+    }
+    setPasswordError(""); // Clear error if passwords match
+
     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/createuser`, {
       method: "POST",
       headers: {
@@ -112,7 +122,7 @@ export default function Signup() {
           <div className="input-group">
             <input
               type={showConfirmPassword ? "text" : "password"}
-              className="form-control"
+              className={`form-control ${passwordError ? "is-invalid" : ""}`}
               id="cpassword"
               name="cpassword"
               // value={note.password}
@@ -132,6 +142,7 @@ export default function Signup() {
               ></i>
             </button>
           </div>
+          {passwordError && <div className="text-danger mt-1">{passwordError}</div>}
         </div>
         <button type="submit" className="btn btn-primary">
           Submit
