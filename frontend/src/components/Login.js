@@ -1,7 +1,7 @@
 import  {  useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Longin = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [note, setNote] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
@@ -95,4 +95,4 @@ const Longin = () => {
   );
 };
 
-export default Longin;
+export default Login;
