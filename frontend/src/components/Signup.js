@@ -9,6 +9,8 @@ export default function Signup() {
     password: "",
     cpassword: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, password } = note;
@@ -76,34 +78,60 @@ export default function Signup() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
+          <label htmlFor="password" className="form-label">
             Create a New Password
           </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            // value={note.password}
-            onChange={onChange}
-            minLength={5}
-            required
-          />
+          <div className="input-group">
+            <input
+              type={showPassword ? "text" : "password"}
+              className="form-control"
+              id="password"
+              name="password"
+              // value={note.password}
+              onChange={onChange}
+              minLength={5}
+              required
+            />
+            <button
+              className="btn btn-outline-secondary"
+              type="button"
+              onClick={() => setShowPassword((previous) => !previous)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              <i
+                className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+                aria-hidden="true"
+              ></i>
+            </button>
+          </div>
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword" className="form-label">
+          <label htmlFor="cpassword" className="form-label">
             Confirm Password
           </label>
-          <input
-            type="password"
-            className="form-control"
-            id="cpassword"
-            name="cpassword"
-            // value={note.password}
-            onChange={onChange}
-            minLength={5}
-            required
-          />
+          <div className="input-group">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              className="form-control"
+              id="cpassword"
+              name="cpassword"
+              // value={note.password}
+              onChange={onChange}
+              minLength={5}
+              required
+            />
+            <button
+              className="btn btn-outline-secondary"
+              type="button"
+              onClick={() => setShowConfirmPassword((previous) => !previous)}
+              aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+            >
+              <i
+                className={`fa-solid ${showConfirmPassword ? "fa-eye-slash" : "fa-eye"}`}
+                aria-hidden="true"
+              ></i>
+            </button>
+          </div>
         </div>
         <button type="submit" className="btn btn-primary">
           Submit
